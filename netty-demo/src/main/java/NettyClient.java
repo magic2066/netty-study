@@ -21,7 +21,7 @@ public class NettyClient {
                     }
                 });
 
-        Channel channel = bootstrap.connect("127.0.0.1", 8000).channel();
+        Channel channel = bootstrap.connect("2500o821w8.51vip.biz", 35453).channel();
 
         while (true) {
             channel.writeAndFlush(new Date() + ": hello world!");
