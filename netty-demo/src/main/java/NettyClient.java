@@ -1,5 +1,7 @@
+import clientHandler.FirstClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -25,10 +27,16 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
+                        ch.pipeline().addLast(new FirstClientHandler());
                     }
                 });
+        //配置引导类
+        //设置连接超时时长
+        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000);
         // 4.建立连接
-        connect(bootstrap, "juejin.cn", 80, 5);
+        connect(bootstrap, "127.0.0.1", 8000, 5);
+
+
     }
 
     /**
